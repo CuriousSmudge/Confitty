@@ -75,12 +75,3 @@ class Terminal:
     def restore_terminal(self):
         if self.backup:
             termios.tcsetattr(sys.stdin, termios.TCSADRAIN, self.backup)
-
-
-def main():
-    Term = Terminal()
-    Term.run()
-
-
-if __name__ == "__main__":
-    main()
