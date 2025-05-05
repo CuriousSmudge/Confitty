@@ -1,4 +1,3 @@
-import pygame as pg
 import sys
 import os
 import pty
@@ -6,9 +5,7 @@ import termios
 import tty
 import select
 
-pg.init()
 BUFFER_READ_BYTES = 1024
-BACKGROUND = (30, 30, 46)
 
 
 class Terminal:
