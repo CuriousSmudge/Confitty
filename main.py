@@ -1,9 +1,9 @@
-import confitty
-# import window
+from processing import terminal
+from ui import window
 
 
 def main():
-    Term = confitty.Terminal()
+    Term = terminal.Terminal()
     Term.run()
 
 
