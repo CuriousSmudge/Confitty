@@ -17,7 +17,7 @@ class Terminal:
         shellPath = os.getenv("SHELL")
         if shellPath is None:
             print("ERROR: Shell path not found - Did you install a shell?")
-            raise Exception
+            raise OSError
         else:
             return shellPath
 
