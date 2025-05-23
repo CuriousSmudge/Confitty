@@ -42,11 +42,7 @@ class Window():
         print("Slave checked")
         
         # Get the inputs and outputs and then check them
-        rlist, _, _ = select.select([self.term.master], [], [])
-        print("rlist Obtained")
-        # self.term.check_input(rlist)
-        output = self.term.check_output(rlist)
-        print("Output checked")
+        output = self.term.read_master()
         if output:
             print("Output found, displaying...")
             self.display_output(output)

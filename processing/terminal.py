@@ -11,6 +11,8 @@ BUFFER_READ_BYTES = 1024
 
 class Terminal:
     def __init__(self):
+        self.masterRecvBuf = bytes()
+        self.inEscape = False
         self.shellPath = self.get_shell()
         self.initiate_shell()
             
@@ -27,6 +29,24 @@ class Terminal:
         if self.processID == 0:
             print("Shell Initiated")
             os.execvp(self.shellPath, [self.shellPath])
+
+    def read_master(self):
+        rlist, _, _ = select.select([self.master], [], [])
+        for i in rlist:
+            try:
+                byte = os.read(i, 1)
+            except:
+                print("Shell exited")
+                os._exit(0)
+                return
+            return self.handle_inputs(byte)
+    
+    def handle_inputs(self, byte):
+        print(f"Master PTY recieved: {byte}")
+        if byte == b'\r':
+            pass
+        else:
+            return byte.decode('utf-8')
 
     # def enter_raw_mode(self):
     #     # Backs up the terminal configuration so emulator can be reverted
