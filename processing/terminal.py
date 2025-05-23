@@ -31,15 +31,21 @@ class Terminal:
             os.execvp(self.shellPath, [self.shellPath])
 
     def read_master(self):
-        rlist, _, _ = select.select([self.master], [], [])
-        for i in rlist:
-            try:
-                byte = os.read(i, 1)
-            except:
-                print("Shell exited")
-                os._exit(0)
+        print("Entered read_master()")
+        rlist, wlist, elist = select.select([self.master], [], [self.master], 0)
+        print("rlist Obtained")
+        if rlist or elist:
+            for i in rlist:
+                try:
+                    byte = os.read(i, 1)
+                except:
+                    print("Shell exited")
+                    os._exit(0)
+                    return
+                return self.handle_inputs(byte)
+            for i in elist:
+                print("Exception")
                 return
-            return self.handle_inputs(byte)
     
     def handle_inputs(self, byte):
         print(f"Master PTY recieved: {byte}")

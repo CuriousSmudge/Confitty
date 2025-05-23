@@ -1,20 +1,15 @@
 import pyray as pr
 import select
+from ui import con
 import sys
 from processing import terminal
-
-keys = {
-    65: "a",
-    66: "b",
-    67: "c",
-    257: "/n"
-}
 
 class Window():
     def __init__(self):
         pr.init_window(800, 450, "Confitty")
         pr.set_target_fps(60)
         self.term = terminal.Terminal()
+        self.displayString = ""
         print("Terminal has started in raylib")
         self.run()
 
@@ -22,12 +17,15 @@ class Window():
         while not pr.window_should_close():
             pr.begin_drawing()
             print("Drawing has been started")
+            pr.clear_background(con.BASE)
+            print("Background blackened")
+
             self.run_terminal()
+
+            self.display_output()
             print("Terminal has been run")
             self.get_inputs()
             print("Inputs have been gotten")
-            pr.clear_background(pr.BLACK)
-            print("Background blackened")
             pr.end_drawing()
             print("Drawing finished")
 
@@ -43,21 +41,18 @@ class Window():
         
         # Get the inputs and outputs and then check them
         output = self.term.read_master()
-        if output:
-            print("Output found, displaying...")
-            self.display_output(output)
+        if not output is None:
+            self.displayString += output
     
     def get_inputs(self):
         print(pr.get_key_pressed)
         if (key_code := pr.get_key_pressed()):
-            key = keys[key_code]
+            key = con.keys[key_code]
             print(key)
             self.term.send_input(key)
     
-    def display_output(self, output: str):
-        print(output)
-        pr.draw_text(output, 190, 200, 20, pr.WHITE)
-        return
-        
+    def display_output(self):
+        pr.draw_text(self.displayString, 10, 10, 12, con.TEXT)
+
     def update_ui():
         ...
