@@ -1,10 +1,21 @@
 import pyray as pr
 
+WIDTH = 800
+HEIGHT = 450
+
 keys = {
     # Letters
     65: "a", 66: "b", 67: "c", 68: "d", 69: "e", 70: "f", 71: "g", 72: "h", 73: "i",
     74: "j", 75: "k", 76: "l", 77: "m", 78: "n", 79: "o", 80: "p", 81: "q", 82: "r",
     83: "s", 84: "t", 85: "u", 86: "v", 87: "w", 88: "x", 89: "y", 90: "z",
+    
+    # Capital Letters (when shift is held)
+    '65_shift': "A", '66_shift': "B", '67_shift': "C", '68_shift': "D", '69_shift': "E",
+    '70_shift': "F", '71_shift': "G", '72_shift': "H", '73_shift': "I", '74_shift': "J",
+    '75_shift': "K", '76_shift': "L", '77_shift': "M", '78_shift': "N", '79_shift': "O",
+    '80_shift': "P", '81_shift': "Q", '82_shift': "R", '83_shift': "S", '84_shift': "T",
+    '85_shift': "U", '86_shift': "V", '87_shift': "W", '88_shift': "X", '89_shift': "Y",
+    '90_shift': "Z",
     
     # Numbers (top row)
     48: "0", 49: "1", 50: "2", 51: "3", 52: "4", 53: "5", 54: "6", 55: "7", 56: "8", 57: "9",
@@ -91,6 +102,53 @@ keys = {
     '93_shift': "}",    # SHIFT + ]
     '96_shift': "~",    # SHIFT + `
     '39_shift': "\"",   # SHIFT + '
+    
+    # Terminal control sequences (Ctrl + key combinations)
+    '65_ctrl': "\x01",  # CTRL + A (Start of heading)
+    '66_ctrl': "\x02",  # CTRL + B (Start of text)
+    '67_ctrl': "\x03",  # CTRL + C (End of text / SIGINT)
+    '68_ctrl': "\x04",  # CTRL + D (End of transmission / EOF)
+    '69_ctrl': "\x05",  # CTRL + E (Enquiry)
+    '70_ctrl': "\x06",  # CTRL + F (Acknowledge)
+    '71_ctrl': "\x07",  # CTRL + G (Bell)
+    '72_ctrl': "\x08",  # CTRL + H (Backspace)
+    '73_ctrl': "\x09",  # CTRL + I (Horizontal tab)
+    '74_ctrl': "\x0A",  # CTRL + J (Line feed)
+    '75_ctrl': "\x0B",  # CTRL + K (Vertical tab)
+    '76_ctrl': "\x0C",  # CTRL + L (Form feed)
+    '77_ctrl': "\x0D",  # CTRL + M (Carriage return)
+    '78_ctrl': "\x0E",  # CTRL + N (Shift out)
+    '79_ctrl': "\x0F",  # CTRL + O (Shift in)
+    '80_ctrl': "\x10",  # CTRL + P (Data link escape)
+    '81_ctrl': "\x11",  # CTRL + Q (Device control 1)
+    '82_ctrl': "\x12",  # CTRL + R (Device control 2)
+    '83_ctrl': "\x13",  # CTRL + S (Device control 3)
+    '84_ctrl': "\x14",  # CTRL + T (Device control 4)
+    '85_ctrl': "\x15",  # CTRL + U (Negative acknowledge)
+    '86_ctrl': "\x16",  # CTRL + V (Synchronous idle)
+    '87_ctrl': "\x17",  # CTRL + W (End of transmission block)
+    '88_ctrl': "\x18",  # CTRL + X (Cancel)
+    '89_ctrl': "\x19",  # CTRL + Y (End of medium)
+    '90_ctrl': "\x1A",  # CTRL + Z (Substitute / SIGTSTP)
+    '91_ctrl': "\x1B",  # CTRL + [ (Escape)
+    '92_ctrl': "\x1C",  # CTRL + \ (File separator / SIGQUIT)
+    '93_ctrl': "\x1D",  # CTRL + ] (Group separator)
+    '94_ctrl': "\x1E",  # CTRL + ^ (Record separator)
+    '95_ctrl': "\x1F",  # CTRL + _ (Unit separator)
+    
+    # Function keys
+    290: "\x1bOP",     # F1
+    291: "\x1bOQ",     # F2
+    292: "\x1bOR",     # F3
+    293: "\x1bOS",     # F4
+    294: "\x1b[15~",   # F5
+    295: "\x1b[17~",   # F6
+    296: "\x1b[18~",   # F7
+    297: "\x1b[19~",   # F8
+    298: "\x1b[20~",   # F9
+    299: "\x1b[21~",   # F10
+    300: "\x1b[23~",   # F11
+    301: "\x1b[24~",   # F12
 }
 
 # Catppuccin Mocha Color Palette
