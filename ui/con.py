@@ -9,14 +9,6 @@ keys = {
     74: "j", 75: "k", 76: "l", 77: "m", 78: "n", 79: "o", 80: "p", 81: "q", 82: "r",
     83: "s", 84: "t", 85: "u", 86: "v", 87: "w", 88: "x", 89: "y", 90: "z",
     
-    # Capital Letters (when shift is held)
-    '65_shift': "A", '66_shift': "B", '67_shift': "C", '68_shift': "D", '69_shift': "E",
-    '70_shift': "F", '71_shift': "G", '72_shift': "H", '73_shift': "I", '74_shift': "J",
-    '75_shift': "K", '76_shift': "L", '77_shift': "M", '78_shift': "N", '79_shift': "O",
-    '80_shift': "P", '81_shift': "Q", '82_shift': "R", '83_shift': "S", '84_shift': "T",
-    '85_shift': "U", '86_shift': "V", '87_shift': "W", '88_shift': "X", '89_shift': "Y",
-    '90_shift': "Z",
-    
     # Numbers (top row)
     48: "0", 49: "1", 50: "2", 51: "3", 52: "4", 53: "5", 54: "6", 55: "7", 56: "8", 57: "9",
     
@@ -78,64 +70,6 @@ keys = {
     347: "",        # RIGHT_SUPER (no character)
     348: "",        # KB_MENU (no character)
     
-    # Shifted symbols (when shift is held)
-    # These would typically be handled by the application logic
-    # based on whether shift is pressed
-    '48_shift': ")",    # SHIFT + 0
-    '49_shift': "!",    # SHIFT + 1
-    '50_shift': "@",    # SHIFT + 2
-    '51_shift': "#",    # SHIFT + 3
-    '52_shift': "$",    # SHIFT + 4
-    '53_shift': "%",    # SHIFT + 5
-    '54_shift': "^",    # SHIFT + 6
-    '55_shift': "&",    # SHIFT + 7
-    '56_shift': "*",    # SHIFT + 8
-    '57_shift': "(",    # SHIFT + 9
-    '59_shift': ":",    # SHIFT + ;
-    '61_shift': "+",    # SHIFT + =
-    '44_shift': "<",    # SHIFT + ,
-    '45_shift': "_",    # SHIFT + -
-    '46_shift': ">",    # SHIFT + .
-    '47_shift': "?",    # SHIFT + /
-    '91_shift': "{",    # SHIFT + [
-    '92_shift': "|",    # SHIFT + \
-    '93_shift': "}",    # SHIFT + ]
-    '96_shift': "~",    # SHIFT + `
-    '39_shift': "\"",   # SHIFT + '
-    
-    # Terminal control sequences (Ctrl + key combinations)
-    '65_ctrl': "\x01",  # CTRL + A (Start of heading)
-    '66_ctrl': "\x02",  # CTRL + B (Start of text)
-    '67_ctrl': "\x03",  # CTRL + C (End of text / SIGINT)
-    '68_ctrl': "\x04",  # CTRL + D (End of transmission / EOF)
-    '69_ctrl': "\x05",  # CTRL + E (Enquiry)
-    '70_ctrl': "\x06",  # CTRL + F (Acknowledge)
-    '71_ctrl': "\x07",  # CTRL + G (Bell)
-    '72_ctrl': "\x08",  # CTRL + H (Backspace)
-    '73_ctrl': "\x09",  # CTRL + I (Horizontal tab)
-    '74_ctrl': "\x0A",  # CTRL + J (Line feed)
-    '75_ctrl': "\x0B",  # CTRL + K (Vertical tab)
-    '76_ctrl': "\x0C",  # CTRL + L (Form feed)
-    '77_ctrl': "\x0D",  # CTRL + M (Carriage return)
-    '78_ctrl': "\x0E",  # CTRL + N (Shift out)
-    '79_ctrl': "\x0F",  # CTRL + O (Shift in)
-    '80_ctrl': "\x10",  # CTRL + P (Data link escape)
-    '81_ctrl': "\x11",  # CTRL + Q (Device control 1)
-    '82_ctrl': "\x12",  # CTRL + R (Device control 2)
-    '83_ctrl': "\x13",  # CTRL + S (Device control 3)
-    '84_ctrl': "\x14",  # CTRL + T (Device control 4)
-    '85_ctrl': "\x15",  # CTRL + U (Negative acknowledge)
-    '86_ctrl': "\x16",  # CTRL + V (Synchronous idle)
-    '87_ctrl': "\x17",  # CTRL + W (End of transmission block)
-    '88_ctrl': "\x18",  # CTRL + X (Cancel)
-    '89_ctrl': "\x19",  # CTRL + Y (End of medium)
-    '90_ctrl': "\x1A",  # CTRL + Z (Substitute / SIGTSTP)
-    '91_ctrl': "\x1B",  # CTRL + [ (Escape)
-    '92_ctrl': "\x1C",  # CTRL + \ (File separator / SIGQUIT)
-    '93_ctrl': "\x1D",  # CTRL + ] (Group separator)
-    '94_ctrl': "\x1E",  # CTRL + ^ (Record separator)
-    '95_ctrl': "\x1F",  # CTRL + _ (Unit separator)
-    
     # Function keys
     290: "\x1bOP",     # F1
     291: "\x1bOQ",     # F2
@@ -149,6 +83,48 @@ keys = {
     299: "\x1b[21~",   # F10
     300: "\x1b[23~",   # F11
     301: "\x1b[24~",   # F12
+}
+
+shiftKeys = {
+    # Capital letters
+    pr.KEY_A: 'A', pr.KEY_B: 'B', pr.KEY_C: 'C', pr.KEY_D: 'D', pr.KEY_E: 'E',
+    pr.KEY_F: 'F', pr.KEY_G: 'G', pr.KEY_H: 'H', pr.KEY_I: 'I', pr.KEY_J: 'J',
+    pr.KEY_K: 'K', pr.KEY_L: 'L', pr.KEY_M: 'M', pr.KEY_N: 'N', pr.KEY_O: 'O',
+    pr.KEY_P: 'P', pr.KEY_Q: 'Q', pr.KEY_R: 'R', pr.KEY_S: 'S', pr.KEY_T: 'T',
+    pr.KEY_U: 'U', pr.KEY_V: 'V', pr.KEY_W: 'W', pr.KEY_X: 'X', pr.KEY_Y: 'Y',
+    pr.KEY_Z: 'Z',
+    
+    # Shifted numbers (symbols)
+    pr.KEY_ONE: '!', pr.KEY_TWO: '@', pr.KEY_THREE: '#', pr.KEY_FOUR: '$',
+    pr.KEY_FIVE: '%', pr.KEY_SIX: '^', pr.KEY_SEVEN: '&', pr.KEY_EIGHT: '*',
+    pr.KEY_NINE: '(', pr.KEY_ZERO: ')',
+    
+    # Shifted punctuation
+    pr.KEY_MINUS: '_',
+    pr.KEY_EQUAL: '+',
+    pr.KEY_LEFT_BRACKET: '{',
+    pr.KEY_RIGHT_BRACKET: '}',
+    pr.KEY_BACKSLASH: '|',
+    pr.KEY_SEMICOLON: ':',
+    pr.KEY_APOSTROPHE: '"',
+    pr.KEY_GRAVE: '~',
+    pr.KEY_COMMA: '<',
+    pr.KEY_PERIOD: '>',
+    pr.KEY_SLASH: '?',
+}
+
+ctrlKeys = {
+    pr.KEY_A: '\x01', pr.KEY_B: '\x02', pr.KEY_C: '\x03', pr.KEY_D: '\x04',
+    pr.KEY_E: '\x05', pr.KEY_F: '\x06', pr.KEY_G: '\x07', pr.KEY_H: '\x08',
+    pr.KEY_I: '\x09', pr.KEY_J: '\x0a', pr.KEY_K: '\x0b', pr.KEY_L: '\x0c',
+    pr.KEY_M: '\x0d', pr.KEY_N: '\x0e', pr.KEY_O: '\x0f', pr.KEY_P: '\x10',
+    pr.KEY_Q: '\x11', pr.KEY_R: '\x12', pr.KEY_S: '\x13', pr.KEY_T: '\x14',
+    pr.KEY_U: '\x15', pr.KEY_V: '\x16', pr.KEY_W: '\x17', pr.KEY_X: '\x18',
+    pr.KEY_Y: '\x19', pr.KEY_Z: '\x1a',
+    pr.KEY_LEFT_BRACKET: '\x1b',    # Ctrl + [
+    pr.KEY_BACKSLASH: '\x1c',       # Ctrl + \
+    pr.KEY_RIGHT_BRACKET: '\x1d',   # Ctrl + ]
+    pr.KEY_GRAVE: '\x1e',           # Ctrl + `
 }
 
 # Catppuccin Mocha Color Palette

@@ -3,6 +3,7 @@ import os
 import pty
 import select
 import shutil
+from ui import window
 
 BUFFER_READ_BYTES = 1024
 
@@ -27,6 +28,16 @@ class Terminal:
         if self.processID == 0:
             print("Shell Initiated")
             os.execvp(self.shellPath, [self.shellPath])
+
+    def set_winsize(self, cols, rows):
+        cols = con.WIDTH // self.character_size[0]
+        rows = con.HEIGHT // self.character_size[1]
+        winsize = struct.pack('HHHH', rows, cols, 0, 0)
+        try:
+            fcntl.ioctl(self.master, termios.TIOCSWINSZ, winsize)
+            print(f"Terminal size set to {cols}x{rows}")
+        except OSError as e:
+            print(f"Failed to set terminal size: {e}")
 
     def read_master(self):
         rlist, wlist, elist = select.select([self.master], [], [self.master], 0)
