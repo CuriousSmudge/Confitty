@@ -254,7 +254,7 @@ class SettingsWindow:
         print("Creating new Window")
         pr.init_window(con.WIDTH-80, con.HEIGHT-40, "Settings")
         print("New Window Created")
-        self.settings = button.Button((120, 140, 200, 40), "Toggle Dark mode", self.second_background, self.text_col)
+        self.settings = button.Button((25, 100, 200, 40), "Toggle Dark mode", self.second_background, self.text_col)
         
         self.close_butt = button.Button((con.WIDTH - 80 - 40, 20, 40, 40), "X", self.second_background, self.text_col)
     
