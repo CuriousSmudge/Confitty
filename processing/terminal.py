@@ -3,7 +3,6 @@ import os
 import pty
 import select
 import shutil
-from ui import window
 
 BUFFER_READ_BYTES = 1024
 

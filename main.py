@@ -1,9 +1,9 @@
 from processing import terminal
-from ui import window
+from ui import app
 
 
 def main():
-    Window = window.Window()
+    Window = app.MainWindow()
 
 if __name__ == "__main__":
     main()

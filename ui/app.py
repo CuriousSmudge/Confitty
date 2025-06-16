@@ -17,7 +17,7 @@ class Cursor:
     y: int = 0
 
 
-class Window:
+class MainWindow:
     def __init__(self):
         pr.init_window(con.WIDTH, con.HEIGHT, "Confitty")
         pr.set_target_fps(60)
@@ -33,8 +33,7 @@ class Window:
         print(self.config['config']["dark_mode"])
         print(self.in_dark_mode)
 
-        self.update_colours()
-
+        self.update_colours(self)
 
         self.character_size = (10, 10)
         self.width = con.WIDTH // self.character_size[0]
@@ -58,7 +57,8 @@ class Window:
             pr.clear_background(self.background_col)
             self.settings.render_button()
             while self.settings.is_clicked(pr.get_mouse_position()):
-                self.run_settings() 
+                settings = SettingsWindow(self)
+                settings.run()
             self.run_terminal()
             self.display_output()
             self.get_inputs()
@@ -232,52 +232,62 @@ class Window:
         self.ESCBuffer = bytearray()
         print("Escape Sequence Ended")
 
-    def update_colours(self):
-        if self.in_dark_mode:
-            self.background_col = con.BASE
-            self.second_background = con.MANTLE
-            self.text_col = con.TEXT
+    @staticmethod
+    def update_colours(obj):
+        if obj.in_dark_mode:
+            obj.background_col = con.BASE
+            obj.second_background = con.MANTLE
+            obj.text_col = con.TEXT
         else:
-            self.background_col = con.TEXT
-            self.second_background = con.OVERLAY2
-            self.text_col = con.BASE
+            obj.background_col = con.TEXT
+            obj.second_background = con.OVERLAY2
+            obj.text_col = con.BASE
 
-    def run_settings(self):
+
+class SettingsWindow:
+    def __init__(self, parent):
+        self.background_col = parent.background_col
+        self.second_background = parent.second_background
+        self.text_col = parent.text_col
+        self.in_dark_mode = parent.in_dark_mode
+        self.parent = parent
         print("Creating new Window")
         pr.init_window(con.WIDTH-80, con.HEIGHT-40, "Settings")
         print("New Window Created")
-        settings = button.Button((120, 140, 200, 40), "Toggle Dark mode", self.second_background, self.text_col)
+        self.settings = button.Button((120, 140, 200, 40), "Toggle Dark mode", self.second_background, self.text_col)
         
-        close_butt = button.Button((10, 20, 40, 40), "X", self.second_background, self.text_col)
+        self.close_butt = button.Button((con.WIDTH - 80 - 40, 20, 40, 40), "X", self.second_background, self.text_col)
+    
 
-        def toggle_dark_mode(butt):
-            if self.in_dark_mode:
-                self.in_dark_mode = False
-            else:
-                self.in_dark_mode = True
-            
-            self.update_colours()
-            # Write the new config to file
-            self.config['config']['dark_mode'] = str(self.in_dark_mode)
-            with open('config.ini', 'w') as f:
-                self.config.write(f)
+    def toggle_dark_mode(self, butt):
+        if self.in_dark_mode:
+            self.in_dark_mode = False
+        else:
+            self.in_dark_mode = True
+        
+        self.parent.update_colours(self)
+        # Write the new config to file
+        self.parent.config['config']['dark_mode'] = str(self.in_dark_mode)
+        with open('config.ini', 'w') as f:
+            self.parent.config.write(f)
 
+    def run(self):
         should_exit = False
         while not should_exit:
             pr.begin_drawing()
             pr.clear_background(self.background_col)
-            # pr.draw_text("Settings", 24, 24, 48, self.text_col)
+            pr.draw_text("Settings", 24, 24, 48, self.text_col)
 
-            settings.render_button()
-            if settings.is_clicked(pr.get_mouse_position()):
-                toggle_dark_mode(settings)
+            self.settings.render_button()
+            if self.settings.is_clicked(pr.get_mouse_position()):
+                self.toggle_dark_mode(self.settings)
 
-            close_butt.render_button()
-            if close_butt.is_clicked(pr.get_mouse_position()):
+            self.close_butt.render_button()
+            if self.close_butt.is_clicked(pr.get_mouse_position()):
                 should_exit = True
 
             pr.end_drawing()
 
         pr.close_window()
-        a = Window()
+        a = MainWindow()
         a.run()
