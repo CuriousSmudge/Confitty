@@ -15,6 +15,7 @@ class Terminal:
         self.initiate_shell()
             
     def get_shell(self):
+        # Find the location of the bash shell
         shellPath = shutil.which("bash")
         if shellPath is None:
             print("ERROR: Shell path not found - Did you install a shell?")
@@ -23,22 +24,14 @@ class Terminal:
             return shellPath
 
     def initiate_shell(self):
+        # Split the shell and affirm master pty over slave pty
         self.processID, self.master = pty.fork()
         if self.processID == 0:
             print("Shell Initiated")
             os.execvp(self.shellPath, [self.shellPath])
 
-    def set_winsize(self, cols, rows):
-        cols = con.WIDTH // self.character_size[0]
-        rows = con.HEIGHT // self.character_size[1]
-        winsize = struct.pack('HHHH', rows, cols, 0, 0)
-        try:
-            fcntl.ioctl(self.master, termios.TIOCSWINSZ, winsize)
-            print(f"Terminal size set to {cols}x{rows}")
-        except OSError as e:
-            print(f"Failed to set terminal size: {e}")
-
     def read_master(self):
+        # Read the output lists of the master pty
         rlist, wlist, elist = select.select([self.master], [], [self.master], 0)
         if rlist or elist:
             for i in rlist:
@@ -69,5 +62,6 @@ class Terminal:
                 return output
 
     def send_input(self, key: str):
+        # Encode the input string and send it to the master pty
         b = key.encode('utf-8')
         os.write(self.master, b)
