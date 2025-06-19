@@ -26,7 +26,7 @@ def drive_csi_sequence():
     print("CSI Sequence Handler Driver")
 
     for i in test_final_bytes:
-        print(f"Final Byte: {i}, Action: {handle_csi_sequence(i)})
+        print(f"Final Byte: {i}, Action: {handle_csi_sequence_logic(i)}")
 
 if __name__ == "__main__":
     drive_csi_sequence()
