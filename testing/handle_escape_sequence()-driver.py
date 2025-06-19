@@ -16,7 +16,7 @@ def drive_escape_classification():
         if buffer_length == 1 and (0x60 <= byte_val <= 0x7E or 0x20 <= byte_val <= 0x2F):
             return "C0"
         
-        return "Unknown/Continuing"
+        return "Unknown"
     
     for byte_val in test_bytes:
         char = chr(byte_val) if 32 <= byte_val <= 126 else 'non-printable'
